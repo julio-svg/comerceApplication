@@ -22,7 +22,7 @@ esta version por logica de negocio siempre lo va a llevar
 ###Servicios disponibles
 Una vez lanzado el microservicio se podrá acceder al API accediendo a la siguiente URL:
 
-local: http://localhost:8080/swagger-ui/
+http://localhost:8080/v1/corporates/1/products/1/seasons?date=2020-12-30T23:59:59
 
 ---
 

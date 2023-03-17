@@ -1,9 +1,58 @@
 package com.comerce.comerce.controllers.impl;
 
-import static org.junit.jupiter.api.Assertions.*;
+import com.comerce.comerce.repository.ProductRepository;
+import com.comerce.comerce.repository.models.PriceDTO;
+import com.comerce.comerce.services.ProductService;
 
-class PriceControllerImplTest {
-/*
+import org.hamcrest.Matchers;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import org.springframework.http.MediaType;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+@ExtendWith(SpringExtension.class)
+@SpringBootTest
+@AutoConfigureMockMvc
+class PricesControllerImplTest {
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @MockBean
+    ProductRepository productRepository;
+
+    @Autowired
+    @Qualifier("ProductServiceImpl")
+    ProductService productService;
+
+    private static LocalDateTime date;
+
+    @BeforeAll
+    public static void init(){
+        date = LocalDateTime.now();
+    }
+
+    /*
 
     Desarrollar unos test al endpoint rest que  validen las siguientes peticiones al servicio con los datos del ejemplo:
 
@@ -21,5 +70,50 @@ class PriceControllerImplTest {
 
  */
 
+    @Test
+    @DisplayName(value = "Test 1: petición a las 10:00 del día 14 del producto 35455   para la brand 1 (ZARA)")
+    void given_OkRequestWhen_tryToGetThen_getTheData() throws Exception {
+
+        Mockito.when(productRepository.findBypriceRatesIdAndCorporateIdAndEndDateIsLessThanEqualAndStartDateIsGreaterThanEqual(Mockito.any(), Mockito.any(),Mockito.any(),Mockito.any())).thenReturn(createOptionalListPrice());
+
+        this.mockMvc
+                .perform(MockMvcRequestBuilders.get("/v1/corporates/{corporateId}/products/{productId}/seasons", "1", "35455")
+                        .param("date", "2020-10-30T10:00:00")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.[0].productId", Matchers.is("1")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.[0].groupID", Matchers.is("35455")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.[0].cost", Matchers.is("36")));
+
+
+    }
+
+    private Optional<java.util.List<PriceDTO>> createOptionalListPrice() {
+        return Optional.of(createPriceDTOList());
+
+    }
+
+    private java.util.List<PriceDTO> createPriceDTOList() {
+
+        List<PriceDTO> priceDTOList = new ArrayList<>();
+        priceDTOList.add(createPriceDTO());
+        return priceDTOList;
+    }
+
+    private PriceDTO createPriceDTO() {
+        PriceDTO priceDTO = new PriceDTO();
+        priceDTO.setProductId(1);
+        priceDTO.setCorporateId(35455);
+        priceDTO.setCost(36L);
+        priceDTO.setCurrencyIso("EUR");
+        priceDTO.setEndDate(date);
+        priceDTO.setStartDate(date);
+        priceDTO.setPriceRatesId(1L);
+        return priceDTO;
+    }
 
 }
+
+
+
