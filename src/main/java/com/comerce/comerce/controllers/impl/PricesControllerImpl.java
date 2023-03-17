@@ -31,7 +31,7 @@ public class PricesControllerImpl implements PriceController {
         log.info("getProductByIdAndFilteringByCorporateIdAndDate Controller");
         //TODO hacer el mapeo con un mapping Generator
         ProductAllRSPDTO productAllRSPDTO = new ProductAllRSPDTO(Mapper.fromProductServiceResponseListDTOtoProductResponseList(
-                productService.getProductByIdAndFilteringByCorporateIdAndDate(Mapper.toProductServiceRequestDTO(productId, corporateId, applicationDate))));
+                productService.getProductByIdAndFilteringByCorporateIdAndDate(corporateId, productId, applicationDate)));
         HttpStatus httpStatus;
 
         if (ObjectUtils.isEmpty(productAllRSPDTO.getData())) {

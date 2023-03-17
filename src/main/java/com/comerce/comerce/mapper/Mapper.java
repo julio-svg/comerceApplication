@@ -22,7 +22,6 @@ public class Mapper {
     // Se usa constructores para evitar setters
     public static ProductServiceRequestDTO toProductServiceRequestDTO(String productId, String corporateId, String applicationDate) {
         LocalDateTime dateTime = LocalDateTime.parse(applicationDate, ISO_LOCAL_DATE_TIME);
-
         return new ProductServiceRequestDTO(Integer.valueOf(productId), Integer.valueOf(corporateId), dateTime);
     }
 
