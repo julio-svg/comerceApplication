@@ -1,0 +1,10 @@
+CREATE TABLE prices(
+price_list BIGINT NOT NULL,
+brand_id INTEGER NOT NULL,
+price BIGINT NOT NULL,
+curr CHARACTER VARYING(255) NOT NULL,
+end_date TIMESTAMP(6) NOT NULL,
+priority INTEGER NOT NULL,
+product_id INTEGER NOT NULL,
+start_date TIMESTAMP(6)
+);

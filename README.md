@@ -1,4 +1,4 @@
-# Storage AP
+# Season AP
 Microservicio realizado con Spring Boot.
 
 Microservicio Seasons
@@ -23,6 +23,12 @@ esta version por logica de negocio siempre lo va a llevar
 Una vez lanzado el microservicio se podrá acceder al API accediendo a la siguiente URL:
 
 http://localhost:8080/v1/corporates/1/products/1/seasons?date=2020-12-30T23:59:59
+
+
+###Prueba de concepto de flyway
+Para probar el funcionamiento de flyway , se realiza una ejecucion basica con el comando:
+
+mvn clean flyway:migrate -Dflyway.configFiles=\src\main\resources\flyway.conf
 
 ---
 
