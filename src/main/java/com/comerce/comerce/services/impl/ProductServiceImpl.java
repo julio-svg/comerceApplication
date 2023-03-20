@@ -33,7 +33,7 @@ public class ProductServiceImpl implements ProductService {
 
         LocalDateTime endDate = LocalDateTime.parse(applicationDate, ISO_LOCAL_DATE_TIME);
         LocalDateTime startDate = LocalDateTime.parse(applicationDate, ISO_LOCAL_DATE_TIME);
-        return Mapper.fromPricesDTOListToProductServiceResponseDTOList(productRepository.findBypriceRatesIdAndCorporateIdAndEndDateIsLessThanEqualAndStartDateIsGreaterThanEqual(Integer.valueOf(corporateId), Integer.valueOf(productId), endDate, startDate));
+        return Mapper.fromPricesDTOListToProductServiceResponseDTOList(productRepository.findByproductIdAndCorporateIdAndEndDateIsAfterAndStartDateIsBefore(Integer.valueOf(productId), Integer.valueOf(corporateId), endDate, startDate));
 
     }
 }

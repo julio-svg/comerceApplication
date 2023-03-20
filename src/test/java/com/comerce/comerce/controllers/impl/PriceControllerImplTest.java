@@ -77,7 +77,7 @@ class PricesControllerImplTest {
     @DisplayName(value = "Test 1: petición a las 10:00 del día 14 del producto 35455   para la brand 1 (ZARA)")
     void given_OkRequestAt10hWhen_tryToGetThen_getTheData() throws Exception {
 
-        Mockito.when(productRepository.findBypriceRatesIdAndCorporateIdAndEndDateIsLessThanEqualAndStartDateIsGreaterThanEqual(Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(createOptionalListPrice());
+        Mockito.when(productRepository.findByproductIdAndCorporateIdAndEndDateIsAfterAndStartDateIsBefore(Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(createOptionalListPrice());
 
         this.mockMvc
                 .perform(MockMvcRequestBuilders.get("/v1/corporates/{corporateId}/products/{productId}/seasons", "1", "35455")
@@ -96,7 +96,7 @@ class PricesControllerImplTest {
     @DisplayName(value = "Test 2: petición a las 16:00 del día 14 del producto 35455   para la brand 1 (ZARA)")
     void given_OkRequestAt16When_tryToGetThen_getTheData() throws Exception {
 
-        Mockito.when(productRepository.findBypriceRatesIdAndCorporateIdAndEndDateIsLessThanEqualAndStartDateIsGreaterThanEqual(Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(createOptionalListPrice());
+        Mockito.when(productRepository.findByproductIdAndCorporateIdAndEndDateIsAfterAndStartDateIsBefore(Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(createOptionalListPrice());
 
         this.mockMvc
                 .perform(MockMvcRequestBuilders.get("/v1/corporates/{corporateId}/products/{productId}/seasons", "1", "35455")
@@ -115,7 +115,7 @@ class PricesControllerImplTest {
     @DisplayName(value = "Test 3: petición a las 21:00 del día 14 del producto 35455   para la brand 1 (ZARA)")
     void given_OkRequestAt21When_tryToGetThen_getTheData() throws Exception {
 
-        Mockito.when(productRepository.findBypriceRatesIdAndCorporateIdAndEndDateIsLessThanEqualAndStartDateIsGreaterThanEqual(Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(createOptionalListPrice());
+        Mockito.when(productRepository.findByproductIdAndCorporateIdAndEndDateIsAfterAndStartDateIsBefore(Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(createOptionalListPrice());
 
         this.mockMvc
                 .perform(MockMvcRequestBuilders.get("/v1/corporates/{corporateId}/products/{productId}/seasons", "1", "35455")
@@ -134,7 +134,7 @@ class PricesControllerImplTest {
     @DisplayName(value = "Test 4: petición a las 10:00 del día 15 del producto 35455   para la brand 1 (ZARA)")
     void given_OkRequest10When_tryToGetThen_getTheData() throws Exception {
 
-        Mockito.when(productRepository.findBypriceRatesIdAndCorporateIdAndEndDateIsLessThanEqualAndStartDateIsGreaterThanEqual(Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(createOptionalListPrice());
+        Mockito.when(productRepository.findByproductIdAndCorporateIdAndEndDateIsAfterAndStartDateIsBefore(Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(createOptionalListPrice());
 
         this.mockMvc
                 .perform(MockMvcRequestBuilders.get("/v1/corporates/{corporateId}/products/{productId}/seasons", "1", "35455")
@@ -153,7 +153,7 @@ class PricesControllerImplTest {
     @DisplayName(value = "Test 5: petición a las 21:00 del día 16 del producto 35455   para la brand 1 (ZARA)")
     void given_OkRequestWhen_tryToGetThen_getTheData() throws Exception {
 
-        Mockito.when(productRepository.findBypriceRatesIdAndCorporateIdAndEndDateIsLessThanEqualAndStartDateIsGreaterThanEqual(Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(createOptionalListPrice());
+        Mockito.when(productRepository.findByproductIdAndCorporateIdAndEndDateIsAfterAndStartDateIsBefore(Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(createOptionalListPrice());
 
         this.mockMvc
                 .perform(MockMvcRequestBuilders.get("/v1/corporates/{corporateId}/products/{productId}/seasons", "1", "35455")
@@ -173,7 +173,7 @@ class PricesControllerImplTest {
     @DisplayName(value = "Test 6: peticion incorrecta para el corporateID (brand)  2 (ZARA)")
     void given_KORequestNoValidCorporateIDWhen_tryToGetThen_getInvalidCorporateIDException() throws Exception {
 
-        Mockito.when(productRepository.findBypriceRatesIdAndCorporateIdAndEndDateIsLessThanEqualAndStartDateIsGreaterThanEqual(Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(createOptionalListPrice());
+        Mockito.when(productRepository.findByproductIdAndCorporateIdAndEndDateIsAfterAndStartDateIsBefore(Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(createOptionalListPrice());
 
         this.mockMvc
                 .perform(MockMvcRequestBuilders.get("/v1/corporates/{corporateId}/products/{productId}/seasons", "2", "35455")

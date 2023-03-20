@@ -11,6 +11,6 @@ import java.util.Optional;
 
 
 public interface ProductRepository extends CrudRepository<PriceDTO,Long> {
-    Optional<List<PriceDTO>> findBypriceRatesIdAndCorporateIdAndEndDateIsLessThanEqualAndStartDateIsGreaterThanEqual
-            (Integer priceratesid, Integer corporateid , LocalDateTime enddate, LocalDateTime startdate );
+    Optional<List<PriceDTO>> findByproductIdAndCorporateIdAndEndDateIsAfterAndStartDateIsBefore
+            (Integer productId, Integer corporateid , LocalDateTime enddate, LocalDateTime startdate );
 }
