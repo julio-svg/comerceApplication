@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class ProductServiceResponseDTO {
+public class SeasonServiceResponseDTO {
     private Integer productId;
     private Integer corporateId;
     private Long priceRatesId;

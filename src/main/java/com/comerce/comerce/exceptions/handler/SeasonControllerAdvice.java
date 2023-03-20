@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
-public class PricesControllerAdvice {
+public class SeasonControllerAdvice {
 
     @ExceptionHandler(WrongCorporateIdException.class)
     public ResponseEntity<Menssage> handle(WrongCorporateIdException e){

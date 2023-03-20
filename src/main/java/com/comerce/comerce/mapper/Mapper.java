@@ -1,9 +1,9 @@
 package com.comerce.comerce.mapper;
 
-import com.comerce.comerce.controllers.dto.ProductResponseDTO;
+import com.comerce.comerce.controllers.dto.SeasonResponseDTO;
 import com.comerce.comerce.repository.models.PriceDTO;
-import com.comerce.comerce.services.dto.ProductServiceRequestDTO;
-import com.comerce.comerce.services.dto.ProductServiceResponseDTO;
+import com.comerce.comerce.services.dto.SeasonServiceRequestDTO;
+import com.comerce.comerce.services.dto.SeasonServiceResponseDTO;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -20,44 +20,44 @@ public class Mapper {
     }
 
     // Se usa constructores para evitar setters
-    public static ProductServiceRequestDTO toProductServiceRequestDTO(String productId, String corporateId, String applicationDate) {
+    public static SeasonServiceRequestDTO toProductServiceRequestDTO(String productId, String corporateId, String applicationDate) {
         LocalDateTime dateTime = LocalDateTime.parse(applicationDate, ISO_LOCAL_DATE_TIME);
-        return new ProductServiceRequestDTO(Integer.valueOf(productId), Integer.valueOf(corporateId), dateTime);
+        return new SeasonServiceRequestDTO(Integer.valueOf(productId), Integer.valueOf(corporateId), dateTime);
     }
 
 
     // se usan Setter para evitar un constructor de mas de 3 parametros cleanCode
-    public static List<ProductResponseDTO> fromProductServiceResponseListDTOtoProductResponseList(List<ProductServiceResponseDTO> productServiceResponseDTOList) {
+    public static List<SeasonResponseDTO> fromProductServiceResponseListDTOtoProductResponseList(List<SeasonServiceResponseDTO> seasonServiceResponseDTOList) {
 
-        return productServiceResponseDTOList.stream().map(productServiceResponseDTO -> {
-            ProductResponseDTO productService = new ProductResponseDTO();
-            productService.setProductId(productServiceResponseDTO.getProductId().toString());
-            productService.setCost(productServiceResponseDTO.getCost());
-            productService.setEndDateTime(productServiceResponseDTO.getEndDateTime());
-            productService.setStartDateTime(productServiceResponseDTO.getStartDateTime());
-            productService.setGroupID(productServiceResponseDTO.getCorporateId().toString());
+        return seasonServiceResponseDTOList.stream().map(seasonServiceResponseDTO -> {
+            SeasonResponseDTO productService = new SeasonResponseDTO();
+            productService.setProductId(seasonServiceResponseDTO.getProductId().toString());
+            productService.setCost(seasonServiceResponseDTO.getCost());
+            productService.setEndDateTime(seasonServiceResponseDTO.getEndDateTime());
+            productService.setStartDateTime(seasonServiceResponseDTO.getStartDateTime());
+            productService.setGroupID(seasonServiceResponseDTO.getCorporateId().toString());
             return productService;
         }).collect(Collectors.toList());
 
     }
 
 
-    public static List<ProductServiceResponseDTO> fromPricesDTOListToProductServiceResponseDTOList(Optional<List<PriceDTO>> optionalPriceDTOList) {
+    public static List<SeasonServiceResponseDTO> fromPricesDTOListToProductServiceResponseDTOList(Optional<List<PriceDTO>> optionalPriceDTOList) {
 
 
         if (optionalPriceDTOList.isEmpty()) {
             return new ArrayList<>();
         } else {
             return optionalPriceDTOList.get().stream().map(priceDTO -> {
-                ProductServiceResponseDTO productServiceResponseDTO = new ProductServiceResponseDTO();
-                productServiceResponseDTO.setProductId(priceDTO.getProductId());
-                productServiceResponseDTO.setCorporateId(priceDTO.getCorporateId());
-                productServiceResponseDTO.setEndDateTime(priceDTO.getEndDate());
-                productServiceResponseDTO.setPriceRatesId(priceDTO.getPriceRatesId());
-                productServiceResponseDTO.setStartDateTime(priceDTO.getStartDate());
-                productServiceResponseDTO.setCost(priceDTO.getCost().toString());
-                productServiceResponseDTO.setPriorityPriceApplication(priceDTO.getPriorityPriceApplication());
-                return productServiceResponseDTO;
+                SeasonServiceResponseDTO seasonServiceResponseDTO = new SeasonServiceResponseDTO();
+                seasonServiceResponseDTO.setProductId(priceDTO.getProductId());
+                seasonServiceResponseDTO.setCorporateId(priceDTO.getCorporateId());
+                seasonServiceResponseDTO.setEndDateTime(priceDTO.getEndDate());
+                seasonServiceResponseDTO.setPriceRatesId(priceDTO.getPriceRatesId());
+                seasonServiceResponseDTO.setStartDateTime(priceDTO.getStartDate());
+                seasonServiceResponseDTO.setCost(priceDTO.getCost().toString());
+                seasonServiceResponseDTO.setPriorityPriceApplication(priceDTO.getPriorityPriceApplication());
+                return seasonServiceResponseDTO;
             }).collect(Collectors.toList());
         }
 

@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @Getter
-public class ProductServiceRequestDTO {
+public class SeasonServiceRequestDTO {
     private Integer productId;
     private Integer corporateId;
     private LocalDateTime applicationDate;

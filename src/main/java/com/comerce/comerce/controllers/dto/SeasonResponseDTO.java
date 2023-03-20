@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Setter
 @Getter
-public class ProductResponseDTO implements Serializable {
+public class SeasonResponseDTO implements Serializable {
 
     private String productId;
     private String groupID;
@@ -19,5 +19,5 @@ public class ProductResponseDTO implements Serializable {
     private LocalDateTime endDateTime;
     private String cost;
 
-
+    // En un ejercicio real, producto y grupo(corporate) seria dominions propios, por lo tanto objetos
 }
