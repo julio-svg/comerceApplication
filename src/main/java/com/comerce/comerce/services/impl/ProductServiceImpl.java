@@ -10,7 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.function.IntPredicate;
+import java.util.function.IntUnaryOperator;
+import java.util.function.Predicate;
+import java.util.function.UnaryOperator;
+import java.util.stream.Collectors;
 
 import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 
@@ -18,6 +26,16 @@ import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 @Service("ProductServiceImpl")
 @Slf4j
 public class ProductServiceImpl implements ProductService {
+
+
+   UnaryOperator<List<ProductServiceResponseDTO>> getOnlyTheSeasonWithBiggestPriority = productServiceResponseDTOList -> productServiceResponseDTOList.stream()
+           .max((a , b) -> {
+               if(a.getPriorityPriceApplication() >= b.getPriorityPriceApplication()){
+                   return 1;
+               }
+                   return -1;
+           }).stream().toList();
+
 
     @Autowired
     ProductRepository productRepository;
@@ -28,12 +46,17 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductServiceResponseDTO> getProductByIdAndFilteringByCorporateIdAndDate(String corporateId, String productId, String applicationDate) {
+
         log.info("ProductServiceImpl getProductByIdAndFilteringByCorporateIdAndDate");
         seasonValidator.validateinput(corporateId,productId,applicationDate);
 
         LocalDateTime endDate = LocalDateTime.parse(applicationDate, ISO_LOCAL_DATE_TIME);
         LocalDateTime startDate = LocalDateTime.parse(applicationDate, ISO_LOCAL_DATE_TIME);
-        return Mapper.fromPricesDTOListToProductServiceResponseDTOList(productRepository.findByproductIdAndCorporateIdAndEndDateIsAfterAndStartDateIsBefore(Integer.valueOf(productId), Integer.valueOf(corporateId), endDate, startDate));
+
+        List<ProductServiceResponseDTO> productServiceResponseDTOList =  Mapper.fromPricesDTOListToProductServiceResponseDTOList(
+                productRepository.findByproductIdAndCorporateIdAndEndDateIsAfterAndStartDateIsBefore(Integer.valueOf(productId), Integer.valueOf(corporateId), endDate, startDate));
+
+        return getOnlyTheSeasonWithBiggestPriority.apply(productServiceResponseDTOList);
 
     }
 }

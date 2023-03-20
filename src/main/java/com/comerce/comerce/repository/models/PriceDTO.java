@@ -47,7 +47,7 @@ public class PriceDTO implements Serializable {
 
     @NotEmpty(message = "cost may not be empty")
     @Column(name = "price")
-    private Long cost;
+    private Float cost;
 
     @Column(name = "curr")
     @NotEmpty(message = "currencyIso may not be empty")

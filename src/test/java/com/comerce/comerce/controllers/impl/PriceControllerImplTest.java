@@ -205,7 +205,7 @@ class PricesControllerImplTest {
         PriceDTO priceDTO = new PriceDTO();
         priceDTO.setProductId(35455);
         priceDTO.setCorporateId(1);
-        priceDTO.setCost(36L);
+        priceDTO.setCost(36.7F);
         priceDTO.setCurrencyIso("EUR");
         priceDTO.setEndDate(date);
         priceDTO.setStartDate(date);

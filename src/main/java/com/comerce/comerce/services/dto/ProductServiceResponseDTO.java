@@ -8,10 +8,11 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class ProductServiceResponseDTO {
-    private String productId;
-    private String corporateId;
-    private String priceRatesId;
+    private Integer productId;
+    private Integer corporateId;
+    private Long priceRatesId;
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
+    private Integer priorityPriceApplication;
     private String cost;
 }
